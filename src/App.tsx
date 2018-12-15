@@ -1,19 +1,29 @@
-import * as React from 'react';
-import './App.css';
+import * as React from "react";
+import "./App.css";
 
-import logo from './logo.svg';
+interface AppState {
+  count: number;
+}
 
-class App extends React.Component {
+class App extends React.Component<{}, AppState> {
+  constructor(props: {}) {
+    super(props);
+    this.state = {
+      count: 0
+    };
+
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick = (event: any) => {
+    this.setState({ count: this.state.count + 1 });
+  };
+
   public render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.tsx</code> and save to reload.
-        </p>
+        <p>{this.state.count}</p>
+        <input type="button" onClick={this.handleClick} value="+1" />
       </div>
     );
   }
